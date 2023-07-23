@@ -14,6 +14,7 @@ class Mastermind
     for i in 1..@clave_length
       @solucion.push(@colores_dispo.sample)
     end
+    # recordar borrar este puts para q no se vea que escoge la maquina
     puts @solucion
   end
 
@@ -37,7 +38,19 @@ class Mastermind
     end
   end
 
-  def play
+  def makerbreaker
+    loop do
+      puts 'Si quieres adivinar introduce una A, si quieres que te adivinen introduce una M'
+      awnser = gets.chomp.downcase
+      if awnser == 'a'
+        breakermode
+      elsif awnser == 'm'
+        # funcion para maker
+      end
+    end
+  end
+
+  def breakermode
     computer_choice
     for i in 1..12
       user_guess
@@ -59,4 +72,4 @@ class Mastermind
 end
 
 new_game = Mastermind.new
-new_game.play
+new_game.makerbreaker
