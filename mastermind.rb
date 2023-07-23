@@ -46,14 +46,14 @@ class Mastermind
   end
 
   def game_rules
-    for i in 0..@clave_length
+    for i in 0..(@clave_length - 1)
       if @solucion[i] == @guess[i]
         @resultado += 'O'
       elsif @solucion[i] == @guess[0] || @solucion[i] == @guess[1] || @solucion[i] == @guess[2] || @solucion[i] == @guess[3]
         @resultado += 'X'
       end
     end
-    puts 'Si la posición es correcta, se mostrará "O", si existe pero no esta en orden, será "X"'
+    puts 'Si la posición es correcta, se mostrará "O", si existe pero no está en orden, será "X":'
     puts @resultado
   end
 end
