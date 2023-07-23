@@ -8,7 +8,6 @@ class Mastermind
     @clave_length = 4
     @solucion = []
     @resultado = ''
-    @guess = []
   end
 
   def computer_choice
@@ -21,18 +20,20 @@ class Mastermind
   def user_guess
     loop do
       puts 'Introduzca su conjetura:'
-      @guess = gets.chomp.upcase
+      @guess = gets.chomp.upcase.split('')
       if @guess.length != @clave_length
         puts "Su conjetura debe tener #{@clave_length} caracteres."
         next
       end
-      if !@guess.split('').index{ |x| !@colores_dispo.include?(x) }.nil?
+      if !@guess.index{ |x| !@colores_dispo.include?(x) }.nil?
         puts "Su conjetura debe contener los siguientes colores: #{@colores_dispo}."
         next
       end
-    end
-    if @solucion == @guess
-      puts We have a winner!
+      if @solucion == @guess
+        puts 'Tenemos un ganador!!!'
+        exit
+      end
+      return
     end
   end
 
@@ -47,13 +48,12 @@ class Mastermind
   def game_rules
     for i in 0..@clave_length
       if @solucion[i] == @guess[i]
-        puts punto rojo
         @resultado += 'O'
-      elsif @solucion[i] == @guess[0] || @guess[1] || @guess[2] || @guess[3]
-        puts punto blanco
+      elsif @solucion[i] == @guess[0] || @solucion[i] == @guess[1] || @solucion[i] == @guess[2] || @solucion[i] == @guess[3]
         @resultado += 'X'
       end
     end
+    puts 'Si la posición es correcta, se mostrará "O", si existe pero no esta en orden, será "X"'
     puts @resultado
   end
 end
