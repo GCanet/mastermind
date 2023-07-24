@@ -1,5 +1,5 @@
 class Mastermind
-  attr_accessor :awnser
+  attr_accessor :awnser, :awnser2
 
   def initialize
   end
@@ -15,10 +15,22 @@ class Mastermind
       end
     end
   end
+
+  def game_over
+    loop do
+      puts 'Volver a jugar? y/n'
+      awnser2 = gets.chomp.downcase
+      if awnser2 == 'y'
+        Mastermind.playinicial
+      elsif awnser == 'n'
+        exit
+      end
+    end
+  end
 end
 
 class Maker
-  attr_accessor :solucion_maker :resultado_maker
+  attr_accessor :solucion_maker, :resultado_maker
 
   def initialize
     @solucion_maker = []
@@ -47,7 +59,7 @@ class Maker
 end
 
 class Breaker
-  attr_accessor :solucion :clave_length :colores_dispo :resultado
+  attr_accessor :solucion, :clave_length, :colores_dispo, :resultado
 
   def initialize
     @colores_dispo = ['R', 'A', 'N', 'V', 'T', 'M']
@@ -90,9 +102,12 @@ class Breaker
   def turnos_breaker
     computer_choice
     for i in 1..12
+      puts "Intento 1 de #{i}."
       user_guess
       game_rules
     end
+    puts 'Se acabaron tus intentos, GAME OVER!'
+    Mastermind.game_over
   end
 
   def game_rules
