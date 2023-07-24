@@ -22,7 +22,7 @@ class Mastermind
       awnser2 = gets.chomp.downcase
       if awnser2 == 'y'
         Mastermind.playinicial
-      elsif awnser == 'n'
+      elsif awnser2 == 'n'
         exit
       end
     end
@@ -102,7 +102,7 @@ class Breaker
   def turnos_breaker
     computer_choice
     for i in 1..12
-      puts "Intento 1 de #{i}."
+      puts "Intento #{i} de 12."
       user_guess
       game_rules
     end
