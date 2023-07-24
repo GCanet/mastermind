@@ -1,7 +1,39 @@
-# guess.index{ |x| !solucion.include?(x) }.nil?
-# Clase para definir el juego y el jugador de la maquina
 class Mastermind
-  attr_accessor :solucion
+  attr_accessor :awnser
+
+  def initialize
+  end
+
+  def playinicial
+    loop do
+      puts 'Si quieres adivinar introduce una A, si quieres que te adivinen introduce una M'
+      awnser = gets.chomp.downcase
+      if awnser == 'a'
+        Breaker.turnos_breaker
+      elsif awnser == 'm'
+        Maker.human_choice
+      end
+    end
+  end
+end
+
+class Maker
+  attr_accessor :solucion_maker :resultado_maker
+
+  def initialize
+    @solucion_maker = []
+    @resultado_maker = ''
+  end
+
+  def human_choice
+  end
+
+  def computer_rules
+  end
+end
+
+class Breaker
+  attr_accessor :solucion :clave_length :colores_dispo :resultado
 
   def initialize
     @colores_dispo = ['R', 'A', 'N', 'V', 'T', 'M']
@@ -38,19 +70,7 @@ class Mastermind
     end
   end
 
-  def makerbreaker
-    loop do
-      puts 'Si quieres adivinar introduce una A, si quieres que te adivinen introduce una M'
-      awnser = gets.chomp.downcase
-      if awnser == 'a'
-        breakermode
-      elsif awnser == 'm'
-        # funcion para maker
-      end
-    end
-  end
-
-  def breakermode
+  def turnos_breaker
     computer_choice
     for i in 1..12
       user_guess
@@ -72,4 +92,4 @@ class Mastermind
 end
 
 new_game = Mastermind.new
-new_game.makerbreaker
+new_game.playinicial
