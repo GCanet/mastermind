@@ -11,7 +11,7 @@ class Mastermind
       if awnser == 'a'
         Breaker.turnos_breaker
       elsif awnser == 'm'
-        Maker.human_choice
+        Maker.clave_human
       end
     end
   end
@@ -25,9 +25,23 @@ class Maker
     @resultado_maker = ''
   end
 
-  def human_choice
+  def clave_human
+    loop do
+      puts 'Introduzca su clave:'
+      @solucion_maker = gets.chomp.upcase.split('')
+      if @solucion_maker.length != @clave_length
+        puts "Su clave debe tener #{@clave_length} caracteres."
+        next
+      end
+      if !@solucion_maker.index{ |x| !@colores_dispo.include?(x) }.nil?
+        puts "Su clave debe contener los siguientes colores: #{@colores_dispo}."
+        next
+      end
+      return
+    end
   end
 
+# 12 turnos + seguir normas, no bruteforce
   def computer_rules
   end
 end
@@ -46,7 +60,10 @@ class Breaker
     for i in 1..@clave_length
       @solucion.push(@colores_dispo.sample)
     end
-    # recordar borrar este puts para q no se vea que escoge la maquina
+    # recordar borrar este puts para q no se vea la solución
+    #
+    #
+    #
     puts @solucion
   end
 
