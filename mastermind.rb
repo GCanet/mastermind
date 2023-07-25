@@ -1,7 +1,9 @@
 class Mastermind
   attr_accessor :awnser, :awnser2
 
-  def initialize
+  def initialize(breaker, maker)
+    @breaker = breaker
+    @maker = maker
   end
 
   def playinicial
@@ -21,7 +23,7 @@ class Mastermind
       puts 'Volver a jugar? y/n'
       awnser2 = gets.chomp.downcase
       if awnser2 == 'y'
-        Mastermind.playinicial
+        playinicial
       elsif awnser2 == 'n'
         exit
       end
@@ -32,7 +34,8 @@ end
 class Maker
   attr_accessor :solucion_maker, :resultado_maker
 
-  def initialize
+  def initialize(mastermind)
+    @mastermind = mastermind
     @solucion_maker = []
     @resultado_maker = ''
   end
@@ -61,11 +64,12 @@ end
 class Breaker
   attr_accessor :solucion, :clave_length, :colores_dispo, :resultado
 
-  def initialize
+  def initialize (mastermind)
     @colores_dispo = ['R', 'A', 'N', 'V', 'T', 'M']
     @clave_length = 4
     @solucion = []
     @resultado = ''
+    @mastermind = mastermind
   end
 
   def computer_choice
@@ -73,8 +77,6 @@ class Breaker
       @solucion.push(@colores_dispo.sample)
     end
     # recordar borrar este puts para q no se vea la solución
-    #
-    #
     #
     puts @solucion
   end
