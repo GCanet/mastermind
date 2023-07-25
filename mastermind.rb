@@ -30,7 +30,7 @@ class Mastermind
     for i in 0..(@clave_length - 1)
       if @solucion[i] == @guess[i]
         @resultado += 'O'
-      elsif @solucion[i] == @guess[0] || @solucion[i] == @guess[1] || @solucion[i] == @guess[2] || @solucion[i] == @guess[3]
+      elsif @guess.join.include?(@solucion[i])
         @resultado += 'X'
       end
     end
@@ -60,7 +60,7 @@ class Maker
 
   def clave_human
     loop do
-      puts 'Introduzca su clave:'
+      puts 'Introduzca su clave, colores disponibles: Rojo, Amarillo, Negro, Verde, Turquesa, Marrón::'
       @mastermind.solucion = gets.chomp.upcase.split('')
       if @mastermind.solucion.length != @mastermind.clave_length
         puts "Su clave debe tener #{@mastermind.clave_length} caracteres."
