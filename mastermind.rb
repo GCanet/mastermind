@@ -20,7 +20,7 @@ class Mastermind
         @breaker.turnos_breaker
       elsif awnser == 'm'
         puts 'Empieza el juego, la máquina te adivina!:'
-        @maker.clave_human
+        @maker.turnos_maker
       end
     end
   end
@@ -74,7 +74,8 @@ class Maker
     end
   end
 
-  def computer_rules
+  def turnos_maker
+    clave_human
     for i in 1..12
       if @mastermind.solucion == @mastermind.guess
         puts 'Lá máquina ha descifrado su clave, GAME OVER!!!'
