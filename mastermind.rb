@@ -4,7 +4,7 @@ class Mastermind
   def initialize
     @colores_dispo = ['R', 'A', 'N', 'V', 'T', 'M']
     @clave_length = 4
-    @resultado = '____'
+    @resultado = ''
     @guess = ''
     @solucion = []
     @breaker = Breaker.new(self)
@@ -30,10 +30,9 @@ class Mastermind
     for i in 0..(@clave_length - 1)
       if @solucion[i] == @guess[i]
         @resultado += 'O'
-      elsif @guess.join.include?(@solucion[i])
+      elsif @guess.include?(@solucion[i])
         @resultado += 'X'
       end
-      @resultado += '_'
     end
     puts 'Si la posición es correcta, se mostrará "O", si existe pero no está en orden, será "X":'
     puts @resultado
@@ -92,16 +91,16 @@ class Maker
 
   def computer_guess
     resultado_array = @mastermind.resultado.split('')
-    new_guess = []
+    new_guess = @mastermind.guess.split('')
     old_guess = @mastermind.guess.split('')
 
     for i in 0..(@mastermind.clave_length - 1)
-      if resultado_array[i] == 'X'
-        new_guess[i].rotate! -1
-      elsif resultado_array[i] == '_'
+      if resultado_array[i] == ''
         new_guess[i] = ['R', 'A', 'N', 'V', 'T', 'M'].sample
       elsif resultado_array[i] == 'O'
         new_guess[i] = old_guess[i]
+      elsif resultado_array[i] == 'X'
+        new_guess[new_guess[i]].rotate!(1)
       end
     end
     @mastermind.guess = new_guess.join
