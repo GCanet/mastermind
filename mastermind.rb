@@ -95,7 +95,7 @@ class Maker
     new_guess = []
     old_guess = @mastermind.guess.split('')
 
-    for i in 0..4
+    for i in 0..(@mastermind.clave_length - 1)
       if resultado_array[i] == 'X'
         new_guess[i].rotate! -1
       elsif resultado_array[i] == '_'
