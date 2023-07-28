@@ -4,7 +4,7 @@ class Mastermind
   def initialize
     @colores_dispo = ['R', 'A', 'N', 'V', 'T', 'M']
     @clave_length = 4
-    @resultado = ''
+    @resultado = '____'
     @guess = ''
     @solucion = []
     @breaker = Breaker.new(self)
@@ -92,20 +92,20 @@ class Maker
 
   def computer_guess
     resultado_array = @mastermind.resultado.split('')
-    old_guess = @mastermind.guess.split('')
     new_guess = []
+    old_guess = @mastermind.guess.split('')
 
     for i in 0..4
-      @mastermind.guess += ['R', 'A', 'N', 'V', 'T', 'M'].sample
+      if resultado_array[i] == 'X'
+        new_guess[i].rotate! -1
+      elsif resultado_array[i] == '_'
+        new_guess[i] = ['R', 'A', 'N', 'V', 'T', 'M'].sample
+      elsif resultado_array[i] == 'O'
+        new_guess[i] = old_guess[i]
+      end
     end
-    if resultado_array[i] == 'X'
-      new_guess[i].rotate! -1
-    elsif resultado_array[i] == '_'
-      new_guess[i] = ['R', 'A', 'N', 'V', 'T', 'M'].sample
-    elsif resultado_array[i] == 'O'
-      new_guess[i] = old_guess[i]
-    end
-    puts "La máquina prueba con: #{guess_array.join}."
+    @mastermind.guess = new_guess.join
+    puts "La máquina prueba con: #{new_guess.join}."
   end
 end
 
