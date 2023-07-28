@@ -91,17 +91,21 @@ class Maker
   end
 
   def computer_guess
+    resultado_array = @mastermind.resultado.split('')
+    old_guess = @mastermind.guess.split('')
+    new_guess = []
+
     for i in 0..4
       @mastermind.guess += ['R', 'A', 'N', 'V', 'T', 'M'].sample
     end
-    if @mastermind.resultado.split('').include?('X')
-      #usar ese color en otra posicion
-    elsif @mastermind.resultado.split('').include?('_')
-      #no usar más ese color
-    elsif @mastermind.resultado.split('').include?('O')
-      #no cambiar ese color
+    if resultado_array[i] == 'X'
+      new_guess[i].rotate! -1
+    elsif resultado_array[i] == '_'
+      new_guess[i] = ['R', 'A', 'N', 'V', 'T', 'M'].sample
+    elsif resultado_array[i] == 'O'
+      new_guess[i] = old_guess[i]
     end
-    puts "La máquina prueba con: #{@mastermind.guess}."
+    puts "La máquina prueba con: #{guess_array.join}."
   end
 end
 
