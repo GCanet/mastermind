@@ -33,6 +33,7 @@ class Mastermind
       elsif @guess.join.include?(@solucion[i])
         @resultado += 'X'
       end
+      @resultado += '_'
     end
     puts 'Si la posición es correcta, se mostrará "O", si existe pero no está en orden, será "X":'
     puts @resultado
@@ -90,6 +91,16 @@ class Maker
   end
 
   def computer_guess
+    for i in 0..4
+      @mastermind.guess += ['R', 'A', 'N', 'V', 'T', 'M'].sample
+    end
+    if @mastermind.resultado.split('').include?('X')
+      #usar ese color en otra posicion
+    elsif @mastermind.resultado.split('').include?('_')
+      #no usar más ese color
+    elsif @mastermind.resultado.split('').include?('O')
+      #no cambiar ese color
+    end
     puts "La máquina prueba con: #{@mastermind.guess}."
   end
 end
